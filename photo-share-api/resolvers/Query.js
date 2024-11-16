@@ -1,11 +1,19 @@
-const { photos } = require('../data')
-
 module.exports = {
-  totalPhotos: () => photos.length,
-  allPhotos: (parent, args) => {
-    if (args.after) {
-      return photos.filter((photo) => new Date(photo.created).getTime() > args.after.getTime())
-    }
-    return photos
-  },
+  totalPhotos: (parent, args, { db }) =>
+    db.collection('photos')
+      .estimatedDocumentCount(),
+
+  allPhotos: (parent, args, { db }) =>
+    db.collection('photos')
+      .find()
+      .toArray(),
+
+  totalUsers: (parent, args, { db }) =>
+    db.collection('users')
+      .estimatedDocumentCount(),
+
+  allUsers: (parent, args, { db }) =>
+    db.collection('users')
+      .find()
+      .toArray(),
 }
