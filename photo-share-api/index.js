@@ -26,7 +26,15 @@ async function start() {
 
   server.applyMiddleware({ app })
 
-  app.get('/', (req, res) => res.end('Welcome to the PhotoShare API'))
+  app.get('/', (req, res) => {
+    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user`
+    const html = `
+      <a href="${githubUrl}">Sign In with GitHub</a> | 
+      <a href="/playground">GraphQL Playground</a> | 
+      <a href="http://localhost:8081/">Mongo Express</a>
+    `
+    res.end(html)
+  })
   app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
 
   app.listen({ port: 4000 }, () => {

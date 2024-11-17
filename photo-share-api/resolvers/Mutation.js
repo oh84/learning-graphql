@@ -1,13 +1,15 @@
+const { ObjectId } = require('mongodb')
+
 const { authorizeWithGithub } = require('../lib')
 
 module.exports = {
-  async postPhoto(parent, args, { db, currentUser }) {
+  async postPhoto(parent, { input }, { db, currentUser }) {
     if (!currentUser) {
       throw new Error('only an authorized user can post a photo')
     }
 
     const newPhoto = {
-      ...args.input,
+      ...input,
       userID: currentUser.githubLogin,
       created: new Date(),
     }
@@ -16,6 +18,14 @@ module.exports = {
     newPhoto.id = insertedId
 
     return newPhoto
+  },
+
+  async tagPhoto(parent, { userID, photoID }, { db }) {
+    await db.collection('tags')
+      .replaceOne({ userID, photoID }, { userID, photoID }, { upsert: true })
+
+    return db.collection('photos')
+      .findOne({ _id: ObjectId.createFromHexString(photoID) })
   },
 
   async githubAuth(parent, { code }, { db }) {
@@ -44,7 +54,7 @@ module.exports = {
 
     const user = await db
       .collection('users')
-      .findOneAndReplace({ githubLogin: login }, latestUserInfo, { upsert: true })
+      .findOneAndReplace({ githubLogin: login }, latestUserInfo, { upsert: true, returnDocument: 'after' })
 
     return { user, token: access_token }
   },

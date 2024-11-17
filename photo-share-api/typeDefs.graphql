@@ -1,3 +1,5 @@
+scalar DateTime
+
 type User {
   githubLogin: ID!
   name: String
@@ -5,16 +7,6 @@ type User {
   postedPhotos: [Photo!]!
   inPhotos: [Photo!]!
 }
-
-enum PhotoCategory {
-  SELFIE
-  PORTRAIT
-  ACTION
-  LANDSCAPE
-  GRAPHIC
-}
-
-scalar DateTime
 
 type Photo {
   id: ID!
@@ -25,6 +17,14 @@ type Photo {
   postedBy: User!
   taggedUsers: [User!]!
   created: DateTime!
+}
+
+enum PhotoCategory {
+  SELFIE
+  PORTRAIT
+  ACTION
+  LANDSCAPE
+  GRAPHIC
 }
 
 input PostPhotoInput {
@@ -39,15 +39,18 @@ type AuthPayload {
 }
 
 type Query {
+  me: User
   totalPhotos: Int!
-  allPhotos(after: DateTime): [Photo!]!
+  allPhotos: [Photo!]!
+  Photo(id: ID!): Photo
   totalUsers: Int!
   allUsers: [User!]!
-  me: User
+  User(githubLogin: ID!): User
 }
 
 type Mutation {
   postPhoto(input: PostPhotoInput!): Photo!
+  tagPhoto(userID: ID!, photoID: ID!): Photo!
   githubAuth(code: String!): AuthPayload!
   addFakeUsers(count: Int = 1): [User!]!
   fakeUserAuth(githubLogin: ID!): AuthPayload!

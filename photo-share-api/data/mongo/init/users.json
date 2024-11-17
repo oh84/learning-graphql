@@ -1,14 +1,29 @@
 [
   {
-    "githubLogin": "mHattrup",
-    "name": "Mike Hattrup"
+    "_id": {
+      "$oid": "6738a0b8fb007a0f254ecadc"
+    },
+    "githubLogin": "reddog780",
+    "name": "David Slawa",
+    "avatar": "https://randomuser.me/api/portraits/thumb/men/59.jpg",
+    "githubToken": "5ec00b11ea697b1eb9e585004d8fe0d47d738c14"
   },
   {
-    "githubLogin": "gPlake",
-    "name": "Glen Plake"
+    "_id": {
+      "$oid": "6738a0b8fb007a0f254ecadd"
+    },
+    "githubLogin": "bigfish130",
+    "name": "Jesse Anttila",
+    "avatar": "https://randomuser.me/api/portraits/thumb/men/49.jpg",
+    "githubToken": "5c112b59079135a9f2bd11f7a5ed8892b5325107"
   },
   {
-    "githubLogin": "sSchmidt",
-    "name": "Scot Schmidt"
+    "_id": {
+      "$oid": "6738a0b8fb007a0f254ecade"
+    },
+    "githubLogin": "goldenleopard731",
+    "name": "Isla Koistinen",
+    "avatar": "https://randomuser.me/api/portraits/thumb/women/73.jpg",
+    "githubToken": "50577c6d94020a1eadb91fb70c266d09809807d3"
   }
 ]
