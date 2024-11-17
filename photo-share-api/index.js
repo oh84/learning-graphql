@@ -6,14 +6,21 @@ const { MongoClient } = require('mongodb')
 require('dotenv').config()
 
 async function start() {
-  const MONGO_DB = process.env.DB_HOST
-  const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true })
+  const client = await MongoClient.connect(process.env.DB_HOST)
   const db = client.db()
 
   const typeDefs = readFileSync('./typeDefs.graphql', 'UTF-8')
   const resolvers = require('./resolvers')
-  const context = { db }
-  const server = new ApolloServer({ typeDefs, resolvers, context })
+
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async ({ req }) => {
+      const githubToken = req.headers.authorization
+      const currentUser = await db.collection('users').findOne({ githubToken })
+      return { db, currentUser }
+    },
+  })
 
   const app = express()
 
