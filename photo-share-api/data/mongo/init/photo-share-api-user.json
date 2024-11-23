@@ -1,0 +1,31 @@
+{
+  "_id": "photo-share-api-db.photo-share-api-user",
+  "userId": {
+    "$binary": {
+      "base64": "tDjAQiWwSsW6JcuMjERurw==",
+      "subType": "04"
+    }
+  },
+  "user": "photo-share-api-user",
+  "db": "photo-share-api-db",
+  "credentials": {
+    "SCRAM-SHA-1": {
+      "iterationCount": 10000,
+      "salt": "2d+2mUlaHVUBL9Vxkg8QYg==",
+      "storedKey": "04FMmqMLUt6ElmIOt0tt3WLSEiI=",
+      "serverKey": "sZmFRulclOc3OY3Nrd2UEWatSyI="
+    },
+    "SCRAM-SHA-256": {
+      "iterationCount": 15000,
+      "salt": "qb0VIsYgS7eNxc+cr7oZZ0sclkdx5YZo+70TZA==",
+      "storedKey": "LyKwISHDe4hzrVhghA9L7dG4mgfJ9Dt7HRgrz39cJxk=",
+      "serverKey": "rqGcHaJG0JcQLrEWMF07tbOBDzV6ZcOsOUmKAsdPNj0="
+    }
+  },
+  "roles": [
+    {
+      "role": "dbOwner",
+      "db": "photo-share-api-db"
+    }
+  ]
+}

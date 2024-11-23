@@ -2,12 +2,40 @@
 
 ## セットアップ
 
+MongoDB と Mongo Express (MongoDBをブラウザの画面から操作できるアプリみたいです) を Docker Compose で起動します。
+GraphQL サーバーはローカルのマシン上で起動します。
+MongoDB 起動時に下記の処理が実行されて初期データが投入されます (参考: https://qiita.com/r1wtn/items/c18e14375bbaa564e289) 。
+
+- `photo-share-api-db` データベースの作成
+- `photo-share-api-user` ユーザーの作成
+- `users`, `tags`, `photos` コレクションの作成とデータ投入
+
+### 起動手順
+
 1. `cp .env.example .env` でコピーして環境変数を設定
-2. MongDB起動: `docker compose up -d`
-3. GraphQLサーバー起動: `npm start`
-4. http://localhost:4000/ にアクセス
+2. MongDB 起動: `docker compose up -d`
+3. npm パッケージインストール: `npm install`
+4. GraphQL サーバー起動: `npm start`
+5. http://localhost:4000/ にアクセス
+
+### 初期データが投入されない場合
+
+Mongo Express (http://localhost:8081) をブラウザで開き、 `data/mongo/init` 内の .json ファイルを使用して手動でデータを投入してください。
+
+- `photo-share-api-db` データベースの作成
+  - Database Name に `photo-share-api-db` を入力して Create Database をクリック
+- `photo-share-api-user` ユーザーの作成
+  - `admin` データベースの `system.users` コレクションを開いて New Document をクリック
+  - `photo-share-api-user.json` の内容を貼り付けて Save をクリック
+- `users`, `tags`, `photos` コレクションの作成とデータ投入
+  - `photo-share-api-db` データベースを開いて Collection Name に `users/tags/photos` をそれぞれ入力して Create collection をクリック
+  - 各コレクションの Import ボタンをクリックして `users.json/tags.json/photos.json` をそれぞれ選択してデータを投入
 
 ## クエリメモ
+
+セットアップ完了後、GraphQL Playground (http://localhost:4000/playground) から以下のクエリが実行できます。
+
+---
 
 ```graphql
 query {
