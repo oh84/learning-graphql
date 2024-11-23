@@ -2,9 +2,9 @@
 
 ## セットアップ
 
-MongoDB と Mongo Express (MongoDBをブラウザの画面から操作できるアプリみたいです) を Docker Compose で起動します。
-GraphQL サーバーはローカルのマシン上で起動します。
-MongoDB 起動時に下記の処理が実行されて初期データが投入されます (参考: https://qiita.com/r1wtn/items/c18e14375bbaa564e289) 。
+MongoDB と Mongo Express (MongoDBをブラウザの画面から操作できるアプリみたいです) を Docker Compose で起動します。  
+GraphQL サーバーはローカルのマシン上で起動します。  
+MongoDB 起動時に下記の処理が実行されて初期データが投入されます (参考: https://qiita.com/r1wtn/items/c18e14375bbaa564e289) 。  
 
 - `photo-share-api-db` データベースの作成
 - `photo-share-api-user` ユーザーの作成
